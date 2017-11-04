@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81a7cc21-a1d9-4ec9-b5bb-9ed9d49f6488">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFEABF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFF7E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="ebe4ad59-1c8f-4d41-986f-81a2c286cc85"/>
+	<parameter name="idTorneo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+torneo.*,
+pelea.numero,
+p_rojo.id AS id_rojo,
+p_rojo.nombre AS rojo_nombre,
+g_rojo.anillo AS rojo_anillo,
+g_rojo.peso AS rojo_peso,
+p_verde.id AS id_verde,
+p_verde.nombre AS verde_nombre,
+g_verde.anillo AS verde_anillo,
+g_verde.peso AS verde_peso
+ FROM 
+`pelea` JOIN torneo JOIN gallo AS g_rojo JOIN gallo AS g_verde JOIN partidos AS p_rojo JOIN partidos AS p_verde 
+ON torneo.id = g_rojo.torneo AND pelea.rojo = g_rojo.id AND pelea.verde = g_verde.id AND g_rojo.partido = p_rojo.id AND g_verde.partido = p_verde.id 
+WHERE g_verde.torneo = $P{idTorneo} AND g_rojo.torneo = $P{idTorneo} ORDER BY pelea.numero]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ubicacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="organizador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="compania" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="num_gallos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tolerancia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso_minimo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso_maximo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="victoria" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empate" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="derrota" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="activo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_rojo" class="java.lang.Integer"/>
+	<field name="rojo_nombre" class="java.lang.String"/>
+	<field name="rojo_anillo" class="java.lang.Integer"/>
+	<field name="rojo_peso" class="java.lang.Integer"/>
+	<field name="id_verde" class="java.lang.Integer"/>
+	<field name="verde_nombre" class="java.lang.String"/>
+	<field name="verde_anillo" class="java.lang.Integer"/>
+	<field name="verde_peso" class="java.lang.Integer"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="5" width="167" height="52" uuid="6e89b5b8-4879-4c19-9f28-8bfba1464830"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Brush Script MT" size="30"/>
+				</textElement>
+				<text><![CDATA[EasyDerby 1.0]]></text>
+			</staticText>
+			<image>
+				<reportElement x="455" y="0" width="100" height="100" uuid="854c73a6-ec3e-4237-8d76-55325e00ca4e"/>
+				<imageExpression><![CDATA["C:\\Users\\Omar\\Google Drive\\Desarrollos\\EasyDerby\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="14" width="555" height="20" uuid="0361ff02-3b5e-4339-a848-22a22fff78ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="417" y="93" width="138" height="20" uuid="9aa95240-42e1-48b4-9a5c-e21840f7d77d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="34" width="189" height="20" uuid="859e86b8-c936-4da3-817c-9d233c822fc3"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ubicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="53" width="189" height="20" uuid="cfe03169-d44f-47a0-93c2-1e137095ca60"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="73" width="189" height="20" uuid="2ec53005-49db-49c7-bc88-8066b740e9f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compania}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="53" width="155" height="20" uuid="4c2ae894-cb18-4bec-a472-3990eef32b15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[BURBOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="73" width="155" height="20" uuid="63784a78-3ebc-4add-a22f-f59014598036"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cel. 496-101-2911]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="93" width="155" height="20" uuid="a2b03ec9-d43b-433f-aa28-a98f393151f0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salinas de Hidalgo S.L.P.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="52">
+			<rectangle>
+				<reportElement x="0" y="11" width="36" height="20" uuid="6d715032-ac2a-4793-97e3-3d54386a690c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="519" y="11" width="36" height="20" uuid="e0d2c96d-bceb-4577-804d-ecc9446bfb55"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="36" y="11" width="244" height="20" uuid="79a9c41f-77b5-4aa1-9df7-4da03cf2a244"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="11" width="239" height="20" uuid="67664f0e-81a3-4234-8afc-cf349c0725f8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="31" width="36" height="20" uuid="67b65089-c2aa-4eb7-9ca8-b09f50f9d46c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="519" y="31" width="36" height="20" uuid="7ea04bfc-ca04-49f7-b46e-c073dd9e5f26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="36" y="31" width="36" height="20" uuid="1a67d756-6de2-4a40-933d-f1add7a59be2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="31" width="36" height="20" uuid="cbcc035d-3aa1-4749-b8d4-423593ec2b68"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="234" y="31" width="46" height="20" uuid="c3c5d705-933b-4e3c-aae7-dcad468ed549"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="188" y="31" width="46" height="20" uuid="b986a4b7-b502-4f13-8224-fba73cff624a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="473" y="31" width="46" height="20" uuid="97f8f080-8077-4aee-b45b-8cc701ea6781"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="427" y="31" width="46" height="20" uuid="8d6b97ad-2067-4641-b395-77eabd70f9e3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="31" width="111" height="20" uuid="ae768549-af7d-40a6-9009-aa3eda57a9b4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="71" y="31" width="117" height="20" uuid="2d42c4bb-c9f7-484d-b04f-5086414ef3af"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="11" width="244" height="20" uuid="40e61808-dbbf-4917-a8d7-d3a4e5610e8a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rojo	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="11" width="239" height="20" uuid="20d1593e-ef03-4dad-a5ec-cce96d2fdee5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verde]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="32" width="117" height="20" uuid="eaa2b97a-dc57-4ea2-865a-d9e2889c15c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="32" width="111" height="20" uuid="6e8533b6-a5c3-4642-8302-ee679971b087"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="32" width="45" height="20" uuid="c0e11d83-861f-4c40-873f-93e807978860"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anillo	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="32" width="45" height="20" uuid="dfdfc87f-fddf-4497-8b76-468463303882"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anillo	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="32" width="45" height="20" uuid="dee8334d-d9bf-4412-962b-6e2805d5f197"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="472" y="31" width="45" height="20" uuid="5ff6c36d-3a89-4645-b2b2-806ca6644e5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="32" width="36" height="20" uuid="595610bc-6a49-40c9-8e7e-eabb302a13fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="30" width="36" height="20" uuid="61e8a7eb-b25c-4a09-b4dd-42de34bff08a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="32" width="36" height="20" uuid="c52183d4-d58d-48a1-842a-33c2cc1658f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="31" width="34" height="20" uuid="97afe2e9-72d8-4413-8d69-cf548a7efd48"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dif]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="36" height="20" uuid="8ab5e759-6076-4694-9116-a53b4deb7a42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="2" width="36" height="20" uuid="0386c020-03c9-4702-9dbf-ce6c3e5c3d1e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_rojo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="2" width="117" height="20" uuid="48f37b4e-8751-4bad-9252-bd15cfa07313"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rojo_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="2" width="47" height="20" uuid="4bdecd15-d0b7-437b-9254-5c479e2d6078"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rojo_anillo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="2" width="46" height="20" uuid="5d430090-7f15-4625-a7cf-0808e8c49c6c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rojo_peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="2" width="36" height="20" uuid="be0d0d0d-45de-4e75-8ef0-3d3f949e17cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_verde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="2" width="111" height="20" uuid="df50abfc-5f77-4b89-834a-3458e91b87fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{verde_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="2" width="46" height="20" uuid="6410dd95-4248-48a2-af84-f0478f09bc45"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{verde_anillo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="2" width="46" height="20" uuid="0d52e885-0211-4cae-b513-1176ce0eca3f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{verde_peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="517" y="2" width="38" height="20" uuid="c927dcec-a169-421b-b96f-4abc637de4d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[Math.abs($F{rojo_peso}-$F{verde_peso})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

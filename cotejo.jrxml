@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81a7cc21-a1d9-4ec9-b5bb-9ed9d49f6488">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="15"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFEABF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFF7E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="ebe4ad59-1c8f-4d41-986f-81a2c286cc85"/>
+	<parameter name="idTorneo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     torneo.`id` AS torneo_id,
+     torneo.`nombre` AS torneo_nombre,
+     torneo.`fecha` AS torneo_fecha,
+     torneo.`ubicacion` AS torneo_ubicacion,
+     torneo.`organizador` AS torneo_organizador,
+     torneo.`compania` AS torneo_compania,
+     torneo.`num_gallos` AS torneo_num_gallos,
+     torneo.`tolerancia` AS torneo_tolerancia,
+     torneo.`peso_minimo` AS torneo_peso_minimo,
+     torneo.`peso_maximo` AS torneo_peso_maximo,
+     torneo.`victoria` AS torneo_victoria,
+     torneo.`empate` AS torneo_empate,
+     torneo.`derrota` AS torneo_derrota,
+     torneo.`activo` AS torneo_activo,
+     partidos.`id` AS partidos_id,
+     partidos.`nombre` AS partidos_nombre,
+     partidos.`origen` AS partidos_origen,
+     partidos.`activo` AS partidos_activo
+FROM
+     `torneo` torneo INNER JOIN `partidos_torneo` partidos_torneo ON torneo.`id` = partidos_torneo.`torneo`
+     INNER JOIN `partidos` partidos ON partidos_torneo.`partido` = partidos.`id`]]>
+	</queryString>
+	<field name="torneo_id" class="java.lang.Integer"/>
+	<field name="torneo_nombre" class="java.lang.String"/>
+	<field name="torneo_fecha" class="java.sql.Date"/>
+	<field name="torneo_ubicacion" class="java.lang.String"/>
+	<field name="torneo_organizador" class="java.lang.String"/>
+	<field name="torneo_compania" class="java.lang.String"/>
+	<field name="torneo_num_gallos" class="java.lang.Integer"/>
+	<field name="torneo_tolerancia" class="java.lang.Integer"/>
+	<field name="torneo_peso_minimo" class="java.lang.Integer"/>
+	<field name="torneo_peso_maximo" class="java.lang.Integer"/>
+	<field name="torneo_victoria" class="java.lang.Boolean"/>
+	<field name="torneo_empate" class="java.lang.Boolean"/>
+	<field name="torneo_derrota" class="java.lang.Boolean"/>
+	<field name="torneo_activo" class="java.lang.Integer"/>
+	<field name="partidos_id" class="java.lang.Integer"/>
+	<field name="partidos_nombre" class="java.lang.String"/>
+	<field name="partidos_origen" class="java.lang.String"/>
+	<field name="partidos_activo" class="java.lang.Integer"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="5" width="167" height="52" uuid="6e89b5b8-4879-4c19-9f28-8bfba1464830"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Brush Script MT" size="30"/>
+				</textElement>
+				<text><![CDATA[EasyDerby 1.0]]></text>
+			</staticText>
+			<image>
+				<reportElement x="455" y="0" width="100" height="100" uuid="854c73a6-ec3e-4237-8d76-55325e00ca4e"/>
+				<imageExpression><![CDATA["C:\\Users\\Omar\\Google Drive\\Desarrollos\\EasyDerby\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="14" width="555" height="20" uuid="0361ff02-3b5e-4339-a848-22a22fff78ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torneo_nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="409" y="93" width="138" height="20" uuid="9aa95240-42e1-48b4-9a5c-e21840f7d77d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="34" width="189" height="20" uuid="859e86b8-c936-4da3-817c-9d233c822fc3"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torneo_ubicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="53" width="189" height="20" uuid="cfe03169-d44f-47a0-93c2-1e137095ca60"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torneo_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="73" width="189" height="20" uuid="2ec53005-49db-49c7-bc88-8066b740e9f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{torneo_compania}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="73" width="155" height="20" uuid="4c2ae894-cb18-4bec-a472-3990eef32b15"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="73" width="155" height="20" uuid="63784a78-3ebc-4add-a22f-f59014598036"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="93" width="155" height="20" uuid="a2b03ec9-d43b-433f-aa28-a98f393151f0"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="52">
+			<rectangle>
+				<reportElement x="0" y="31" width="36" height="20" uuid="67b65089-c2aa-4eb7-9ca8-b09f50f9d46c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="266" y="31" width="46" height="20" uuid="c3c5d705-933b-4e3c-aae7-dcad468ed549"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="220" y="31" width="46" height="20" uuid="b986a4b7-b502-4f13-8224-fba73cff624a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="36" y="31" width="185" height="20" uuid="2d42c4bb-c9f7-484d-b04f-5086414ef3af"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="36" y="32" width="184" height="20" uuid="eaa2b97a-dc57-4ea2-865a-d9e2889c15c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="32" width="45" height="20" uuid="dfdfc87f-fddf-4497-8b76-468463303882"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="32" width="45" height="20" uuid="dee8334d-d9bf-4412-962b-6e2805d5f197"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="32" width="36" height="20" uuid="c52183d4-d58d-48a1-842a-33c2cc1658f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="312" y="31" width="46" height="20" uuid="b0eac0f2-328b-4e5a-b89f-725fceda7ebf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="358" y="31" width="46" height="20" uuid="e02e7b80-2810-4b9b-b134-e41dd70667fd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="404" y="31" width="46" height="20" uuid="25b808ae-6f24-47a5-8ee0-a2a944ec3c3c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="404" y="32" width="46" height="20" uuid="9d8fa512-903a-493c-b697-9eb8297c0b00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="32" width="46" height="20" uuid="540ab7c3-497f-4a84-a1bb-f10badada09e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="32" width="46" height="20" uuid="fa69cf3d-e32b-4f3b-82bf-7a679fe44fc8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[3]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<rectangle>
+				<reportElement x="37" y="53" width="185" height="20" uuid="42f57ccb-38e8-43ed-8107-50147f5ce774"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-28" y="-11" width="36" height="20" uuid="3923830e-d67d-46a4-8c0b-7f8114d79751"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
